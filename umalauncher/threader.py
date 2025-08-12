@@ -1,3 +1,20 @@
+# nuitka-project: --onefile
+# nuitka-project: --enable-plugin=pyqt5
+# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/_assets=_assets"
+# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/ff_profile=ff_profile"
+# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/external=external"
+# nuitka-project: --include-data-dir="../venv/Lib/site-packages/google=google"
+# nuitka-project: --include-data-dir="../venv/Lib/site-packages/google/protobuf=google.protobuf"
+# nuitka-project: --include-module="google.protobuf"
+# nuitka-project: --include-package="google.protobuf"
+# nuitka-project: --windows-icon-from-ico="_assets/icon/default.ico"
+# nuitka-project: --windows-console-mode="attach"
+# nuitka-project: --product-version="1.16.4"
+# nuitka-project: --file-version="1.16.4"
+# nuitka-project: --file-description="Uma Launcher"
+# nuitka-project: --product-name="UmaLauncher"
+# nuitka-project: --windows-uac-admin
+
 import util
 import sys
 gzips = list([path for path in sys.argv if path.endswith(".gz")])
@@ -57,6 +74,12 @@ class Threader():
 
         if self.should_stop:
             return
+            
+        # Check for steam
+        util.is_steam = False
+        if util.find_steam_install_folder():
+            logger.info("Steam install found! Using Steam version over DMM...")
+            util.is_steam = True
 
         # Ping the server to track usage
         self.settings.notify_server()

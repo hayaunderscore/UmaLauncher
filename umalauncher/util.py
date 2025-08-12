@@ -13,6 +13,8 @@ from loguru import logger
 import json
 import constants
 import shutil
+from winreg import *
+import vdf
 
 ignore_errors = False
 
@@ -24,9 +26,14 @@ if hasattr(sys, "_MEIPASS"):
     is_script = False
     relative_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     os.chdir(relative_dir)
+if "__compiled__" in globals():
+    unpack_dir = __compiled__.containing_dir
+    is_script = False
 is_debug = is_script
 
 appdata_dir = os.path.expandvars("%AppData%\\Uma-Launcher\\")
+
+is_steam = False
 
 if is_script:
     appdata_dir = os.path.join(relative_dir, "appdata")
@@ -149,8 +156,40 @@ def do_get_request(url, error_title=None, error_message=None, ignore_timeout=Fal
             last_failed_request = time.perf_counter()
         return None
 
+def get_registry_key(sub_key, sub_key_name):
+    hkey = OpenKey(HKEY_LOCAL_MACHINE, sub_key)
+    result, _ = QueryValueEx(hkey, sub_key_name)
+    CloseKey(hkey)
+    return result
+
+def get_steam_folder():
+    # For now default to x64 path....
+    return get_registry_key("SOFTWARE\\WOW6432Node\\Valve\\Steam", "InstallPath")
+
+def find_steam_install_folder():
+    game_data = None
+    if get_steam_folder() != "":
+        logger.debug(os.path.join(get_steam_folder(), "steamapps/libraryfolders.vdf"))
+        with open(os.path.join(get_steam_folder(), "steamapps/libraryfolders.vdf"), "r", encoding='utf-8') as f:
+            game_data = vdf.loads(f.read())
+    
+    if not game_data:
+        return None
+    
+    path = None
+    for folder in game_data['libraryfolders']:
+        for app, value in game_data['libraryfolders'][folder]['apps'].items():
+            if app == '3564400' and value != "0":
+                path = os.path.join(game_data['libraryfolders'][folder]['path'], "steamapps/common/UmamusumePrettyDerby_Jpn")
+                logger.debug(f"{path}")
+                break
+    
+    return path
 
 def get_game_folder():
+    if is_steam:
+        return find_steam_install_folder()
+    
     game_data = None
     with open(os.path.expandvars("%AppData%\\dmmgameplayer5\\dmmgame.cnf"), "r", encoding='utf-8') as f:
         game_data = json.loads(f.read())
@@ -330,7 +369,7 @@ def get_window_handle(query: str, type=LAZY) -> str:
     return window_handle
 
 def get_game_handle():
-    return get_window_handle("umamusume", type=EXACT)
+    return get_window_handle("UmamusumePrettyDerby_Jpn", type=EXACT)
 
 
 def get_position_rgb(image: Image.Image, position: tuple[float,float]) -> tuple[int,int,int]:
@@ -343,7 +382,7 @@ def get_position_rgb(image: Image.Image, position: tuple[float,float]) -> tuple[
     return pixel_color
 
 
-def similar_color(col1: tuple[int,int,int], col2: tuple[int,int,int], threshold: int = 32) -> bool:
+def similar_color(col1: tuple[int,int,int], col2: tuple[int,int,int], threshold: int = 64) -> bool:
     total_diff = 0
     for i in range(3):
         total_diff += abs(col1[i] - col2[i])

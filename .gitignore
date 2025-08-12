@@ -5,3 +5,8 @@ tests/packets/*
 *__pycache__*
 *.log*
 sandbox.*
+umalauncher/build/*
+umalauncher/dist/*
+umalauncher/threader.build/*
+umalauncher/threader.dist/*
+umalauncher/threader.onefile-build/*

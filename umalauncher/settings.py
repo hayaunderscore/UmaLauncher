@@ -115,7 +115,7 @@ class DefaultSettings(se.NewSettings):
         "lock_game_window": se.Setting(
             "Lock game window",
             "Lock the game window to prevent accidental resizing.",
-            True,
+            False, # False for now as it has numerous issues atm
             se.SettingType.BOOL,
             tab="Position"
         ),

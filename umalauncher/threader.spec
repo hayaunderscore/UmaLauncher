@@ -23,6 +23,9 @@ a.datas += Tree('./external', prefix='external')
 a.datas += Tree('./ff_profile', prefix='ff_profile')
 
 a.datas += Tree('../venv/Lib/site-packages/google', prefix='external/google')
+a.datas += Tree('../venv/Lib/site-packages/google', prefix='google')
+a.datas += Tree('../venv/Lib/site-packages/google/protobuf', prefix='external/google/protobuf')
+a.datas += Tree('../venv/Lib/site-packages/google/protobuf', prefix='google/protobuf')
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 

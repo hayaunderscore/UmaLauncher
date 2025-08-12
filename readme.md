@@ -1,7 +1,7 @@
 # Uma Launcher
-Software that enhances the Uma Musume (Japanese DMM Version) experience.
+Software that enhances the Uma Musume (JP) experience.
 
-## NOTE: *Uma Launcher only works with the Japanese DMM version of Uma Musume! The Japanese and Global Steam releases are not currently supported!*
+## NOTE: *Uma Launcher only works with the Japanese versions of Uma Musume! The Global Steam release is not currently supported!*
 
 [Frequently Asked Questions](FAQ.md)
 
@@ -10,12 +10,12 @@ For questions and feedback, join the Discord server:
 [![Uma Launcher Discord server](https://discordapp.com/api/guilds/1089576859349569646/widget.png?style=banner2)](https://discord.gg/wvGHW65C6A)
 
 ## Requirements (Optional but recommended)
-### NOTE: CarrotJuicer is no longer maintained and the version available on GitHub does not work with the current Japanese DMM Version of Uma Musume. 
+### NOTE: CarrotJuicer is against the TOS and may get you banned! Use this at your own risk. 
 <details>
-  <summary>(OBSOLETE) CarrotJuicer</summary>
+  <summary>CarrotJuicer</summary>
   
-- [EXNOA-CarrotJuicer](https://github.com/CNA-Bld/EXNOA-CarrotJuicer) (Not made by me.)
-  - Download the latest version's `Umamusume.7z`: [![Latest release](https://img.shields.io/github/v/release/CNA-Bld/EXNOA-CarrotJuicer)](https://github.com/CNA-Bld/EXNOA-CarrotJuicer/releases/latest)
+- [CarrotJuicer](https://github.com/hayaunderscore/CarrotJuicer) (Not *originally* made by me.)
+  - Manually compile CarrotJuicer.
   - Extract CarrotJuicer's `version.dll` to the game's installation folder.<br>(The same folder where `umamusume.exe` is located.)
   - While optional, CarrotJuicer allows Uma Launcher to extract information from the network packets the game sends/receives. This information is necessary to determine the current status of the game, and needed for most of the features of Uma Launcher to work.
 
@@ -24,12 +24,34 @@ For questions and feedback, join the Discord server:
 ## Download
 Download the latest version's `UmaLauncher.exe`:
 
-[![Latest release](https://img.shields.io/github/v/release/qwcan/UmaLauncher)](https://github.com/qwcan/UmaLauncher/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/hayaunderscore/UmaLauncher)](https://github.com/hayaunderscore/UmaLauncher/releases/latest)
+
+You can also manually run Uma Launcher by cloning this repo and running `threader.py` inside the `umalauncher` folder.
+
+Dependencies are located in `requirements.txt` and can be directly used via:
+
+```
+python -m pip install -r requirements.txt
+```
+
+## Building
+
+### With PyInstaller
+
+Run the dedicated `build.bat` file that sets it all up for you. You should get a `UmaLauncher.exe` file in `umalauncher/dist`.
+
+### With Nuitka
+
+Nuitka is not listed as a requirement, so you have to install it manually.
+
+Run `python -m nuitka threader.py` in the `umalauncher` folder. `threader.exe` will appear in the same folder.
 
 ## Usage
 Download the latest release's `UmaLauncher.exe` and run it. Right-click the horseshoe icon in the system tray to change the settings or close Uma Launcher.
 
 On first launch or when you change the game's location, you may be asked to select the installation location for the game if you are not using the default location.
+
+**The Steam version is prioritized over DMM.** If you have both installations, consider uninstalling the Steam version temporarily if you wanna use the DMM version.
 
 When a new version of Uma Launcher is available, you will be notified on startup. You may choose to update, or postpone the update temporarily or permanently.
 

@@ -6,6 +6,7 @@ import constants
 import gui
 
 DB_PATH = os.path.expandvars("%userprofile%\\appdata\\locallow\\Cygames\\umamusume\\master\\master.mdb")
+STEAM_DB_PATH = os.path.expandvars("%userprofile%\\appdata\\locallow\\Cygames\\UmamusumePrettyDerby_Jpn\\master\\master.mdb")
 
 def update_mdb_cache():
     logger.info("Reloading cached dicts.")
@@ -16,7 +17,10 @@ def update_mdb_cache():
 class Connection():
     def __init__(self):
         try:
-            self.conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+            path = DB_PATH
+            if util.is_steam:
+                path = STEAM_DB_PATH
+            self.conn = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
         except sqlite3.OperationalError:
             util.show_error_box_no_report("Connection Error", "Could not connect to the game database.<br>Try restarting Uma Launcher after the game updates.<br>Uma Launcher will now close.")
             if gui.THREADER:

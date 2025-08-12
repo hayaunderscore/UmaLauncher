@@ -16,6 +16,7 @@ import dmm
 import mdb
 import vpn
 import umapatcher
+import steam
 
 START_TIME = time.time()
 
@@ -262,14 +263,17 @@ class ScreenStateHandler():
 
                 if onetime:
                     onetime = False
-                    # If DMM is not seen AND Game is not seen: Start DMM
+                    # If DMM/Steam is not seen AND Game is not seen: Start DMM/Steam
                     if not self.game_seen:
-                        # Enable DMM-only VPN
-                        if self.threader.settings["vpn_enabled"] and self.threader.settings["vpn_dmm_only"]:
-                            self.vpn = vpn.create_client(self.threader)
-                            self.vpn.connect()
+                        if not util.is_steam:
+                            # Enable DMM-only VPN
+                            if self.threader.settings["vpn_enabled"] and self.threader.settings["vpn_dmm_only"]:
+                                self.vpn = vpn.create_client(self.threader)
+                                self.vpn.connect()
 
-                        dmm.start()
+                            dmm.start()
+                        else:
+                            steam.start()
                 
                 if not self.game_closed:
                     continue
