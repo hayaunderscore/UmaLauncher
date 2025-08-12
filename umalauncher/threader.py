@@ -9,8 +9,8 @@
 # nuitka-project: --include-package="google.protobuf"
 # nuitka-project: --windows-icon-from-ico="_assets/icon/default.ico"
 # nuitka-project: --windows-console-mode="attach"
-# nuitka-project: --product-version="1.16.4"
-# nuitka-project: --file-version="1.16.4"
+# nuitka-project: --product-version="1.16.5"
+# nuitka-project: --file-version="1.16.5"
 # nuitka-project: --file-description="Uma Launcher"
 # nuitka-project: --product-name="UmaLauncher"
 # nuitka-project: --windows-uac-admin

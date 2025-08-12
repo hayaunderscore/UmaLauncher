@@ -40,6 +40,8 @@ python -m pip install -r requirements.txt
 
 Run the dedicated `build.bat` file that sets it all up for you. You should get a `UmaLauncher.exe` file in `umalauncher/dist`.
 
+You may get an error regarding `google.protobuf` upon launch. To fix this, you may need to manually copy over the protobuf packages over `venv/Lib/site-packages/google`.
+
 ### With Nuitka
 
 Nuitka is not listed as a requirement, so you have to install it manually.
