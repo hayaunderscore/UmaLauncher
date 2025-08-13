@@ -5,7 +5,7 @@ import sys
 import util
 sys.path.append(util.get_asset('external'))
 
-import race_data_pb2
+from external import race_data_pb2
 
 
 def deserialize_header(b: bytearray) -> (race_data_pb2.RaceSimulateHeaderData, int):

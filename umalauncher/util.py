@@ -21,14 +21,16 @@ ignore_errors = False
 relative_dir = os.path.abspath(os.getcwd())
 unpack_dir = relative_dir
 is_script = True
+is_compiled = False
 if hasattr(sys, "_MEIPASS"):
     unpack_dir = sys._MEIPASS
     is_script = False
     relative_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     os.chdir(relative_dir)
 if "__compiled__" in globals():
-    unpack_dir = __compiled__.containing_dir
+    unpack_dir = os.path.dirname(__file__)
     is_script = False
+    is_compiled = True
 is_debug = is_script
 
 appdata_dir = os.path.expandvars("%AppData%\\Uma-Launcher\\")

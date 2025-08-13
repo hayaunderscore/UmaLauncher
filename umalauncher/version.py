@@ -12,6 +12,7 @@ import gui
 import glob
 
 VERSION = "1.16.5"
+VERSION_APPEND = "-hu"
 
 def parse_version(version_string: str):
     """Convert version string to tuple."""
@@ -23,6 +24,8 @@ def vstr(version_tuple: tuple):
     """Convert version tuple to string."""
     return ".".join([str(num) for num in version_tuple])
 
+def vsion():
+    return VERSION + VERSION_APPEND
 
 def upgrade(umasettings, raw_settings):
     """Upgrades old versions."""

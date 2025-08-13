@@ -1422,7 +1422,7 @@ class AboutDialog(UmaMainDialog):
         sizePolicy.setHeightForWidth(self.lbl_version.sizePolicy().hasHeightForWidth())
         self.lbl_version.setSizePolicy(sizePolicy)
         self.lbl_version.setLayoutDirection(qtc.Qt.LeftToRight)
-        self.lbl_version.setText(f"Version {version.VERSION}")
+        self.lbl_version.setText(f"Version {version.vsion()}")
         self.lbl_version.setAlignment(qtc.Qt.AlignCenter)
 
         self.verticalLayout.addWidget(self.lbl_version)

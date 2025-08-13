@@ -1,14 +1,17 @@
 # nuitka-project: --onefile
 # nuitka-project: --enable-plugin=pyqt5
-# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/_assets=_assets"
-# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/ff_profile=ff_profile"
-# nuitka-project: --include-data-dir="{MAIN_DIRECTORY}/external=external"
+# nuitka-project: --include-data-dir="_assets=_assets"
+# nuitka-project: --include-data-dir="ff_profile=ff_profile"
+# nuitka-project: --include-data-dir="external=external"
 # nuitka-project: --include-data-dir="../venv/Lib/site-packages/google=google"
 # nuitka-project: --include-data-dir="../venv/Lib/site-packages/google/protobuf=google.protobuf"
 # nuitka-project: --include-module="google.protobuf"
 # nuitka-project: --include-package="google.protobuf"
 # nuitka-project: --windows-icon-from-ico="_assets/icon/default.ico"
-# nuitka-project: --windows-console-mode="attach"
+# nuitka-project: --windows-console-mode="force"
+# nuitka-project: --follow-imports
+# nuitka-project: --include-plugin-directory="external"
+# nuitka-project: --output-filename="UmaLauncher.exe"
 # nuitka-project: --product-version="1.16.5"
 # nuitka-project: --file-version="1.16.5"
 # nuitka-project: --file-description="Uma Launcher"
